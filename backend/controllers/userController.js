@@ -80,7 +80,14 @@ exports.loginUser = asyncHandler(async (req, res) => {
 // @access Private
 // to protect a route, we use middleware (a custom piece of middleware)
 exports.getMe = asyncHandler(async (req, res) => {
-  res.json({ message: 'Here\'s your profile' })
+  const { _id, name, email } = await User.findById(req.user.id)
+
+
+  res.status(200).json({ 
+    id: _id,
+    name,
+    email
+  })
 })
 
 // generate JWT
